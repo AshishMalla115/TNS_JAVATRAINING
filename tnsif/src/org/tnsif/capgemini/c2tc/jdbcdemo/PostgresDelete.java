@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class PostgresUpdate {
+public class PostgresDelete {
 	   public static void main( String args[] ) {
 	      Connection c = null;
 	      Statement stmt = null;
@@ -18,11 +18,13 @@ public class PostgresUpdate {
 	         System.out.println("Opened database successfully");
 
 	         stmt = c.createStatement();
-	         String sql = "UPDATE COMPANY set SALARY = 45000.00 where ID=7;";
+	         String sql = "DELETE from COMPANY where ID = 8;";
 	         stmt.executeUpdate(sql);
 	         c.commit();
-
+//The result of this query is stored in a (Class)ResultSet (rs), which is a special object that holds the rows of data returned by the query.
 	         ResultSet rs = stmt.executeQuery( "SELECT * FROM COMPANY;" );
+//The ResultSet (rs) contains multiple rows of data. The method rs.next() moves the cursor to the next row in the result set.
+	         //It returns true as long as there are more rows to process, and false when no rows are left.	         
 	         while ( rs.next() ) {
 	            int id = rs.getInt("id");
 	            String  name = rs.getString("name");
@@ -46,4 +48,3 @@ public class PostgresUpdate {
 	      System.out.println("Operation done successfully");
 	   }
 	}
-
